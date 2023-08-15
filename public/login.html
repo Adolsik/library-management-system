@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Sign In</title>
+</head>
+<body class="bg-slate-900">
+    <!-- Form -->
+    <div class="flex justify-center mt-10">
+        <form action="login.php" method="post" enctype="text/plain">
+            <div class="grid gap-6 m-6 border-2 border-gray-500 p-5 rounded-lg w-96">
+                <div>
+                    <span class="inputLabel">E-mail</span>
+                    <input class="input" type="email" name="email" placeholder="E-mail" required> 
+                </div>
+                <div>
+                    <span class="inputLabel">Password</span> 
+                    <input class="input" type="password" name="password" placeholder="Password" required>
+                </div>
+                <input class="submit" type="submit" value="Sign in">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
