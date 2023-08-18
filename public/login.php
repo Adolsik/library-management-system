@@ -1,24 +1,35 @@
 <?php
     require('login.html');
+    require('connDb.php');
 
-    $conn = new mysqli('localhost','root','','library-management-system');
-
-    if(!$conn){
-        echo "Connection failed!";
-    }
-
-    if(isset($_POST['email']) && isset($_POST['password'])){
+    if(isset($_POST['email']) && isset($_POST['password'])){ 
+        session_start();
         # User data
         $pass = $_POST['password'];
         $email = $_POST['email'];
+        $hash = '';
 
-        $hashPass = hash('sha256',$pass);
+        $get_user = "SELECT * FROM users WHERE email = '$email'";
+        $result = $conn->query($get_user);
 
-        $sql = "INSERT INTO users (name,surname,email,password) VALUES ('$name','$surname','$email','$hashPass')";
-        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $hash = $row['password'];
+            } 
+        }
 
-        header('Location: index.php?registerSuccess=success');
+        if(password_verify($pass, $hash)){;
+            $_SESSION['user'] = $email;
+            if($email=='admin'){
+                header('Location: dashboard.php');
+            } else {
+                header('Location: index.php');
+            }
+           
+        } else {
+            $msg = "<h1 class='absolute top-0 left-0 text-lg text-white'> Invalid e-mail or password </h1>";
+            echo $msg;     
+        }
+
     }
-
-
 ?>
