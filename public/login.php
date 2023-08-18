@@ -1,12 +1,13 @@
 <?php
-    require('login.html');
     require('connDb.php');
+
+    $infoMsg = '';
 
     if(isset($_POST['email']) && isset($_POST['password'])){ 
         session_start();
         # User data
-        $pass = $_POST['password'];
-        $email = $_POST['email'];
+        $pass = $conn->real_escape_string($_POST['password']);
+        $email = $conn->real_escape_string($_POST['email']);
         $hash = '';
 
         $get_user = "SELECT * FROM users WHERE email = '$email'";
@@ -20,15 +21,14 @@
 
         if(password_verify($pass, $hash)){;
             $_SESSION['user'] = $email;
-            if($email=='admin'){
+            $_SESSION['pass'] = $hash;
+            if($email == 'admin'){
                 header('Location: dashboard.php');
             } else {
                 header('Location: index.php');
-            }
-           
+            } 
         } else {
-            $msg = "<h1 class='absolute top-0 left-0 text-lg text-white'> Invalid e-mail or password </h1>";
-            echo $msg;     
+            $infoMsg = "Invalid e-mail and/or password";
         }
 
     }

@@ -1,10 +1,18 @@
 <?php
+session_start();
+
 if (isset($_SESSION['user'])){
-    require('dashboard.php');
+    if($_SESSION['user']=='admin'){
+        header('Location: dashboard.php');
+    } else {
+        header('Location: home_logged.html');
+    }
+    #requiere home page for logged in  
 } else {
-    require('home.html');
+    header('Location: home.html');
 }
 
+#todo
 if(isset($_GET['registerSuccess'])){
     echo <<< notif
         <div class='notification'>
