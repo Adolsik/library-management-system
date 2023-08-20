@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="searchbar.js"></script>
     <link rel="stylesheet" href="styles.css">
     <title>Library Management System</title>
 </head>
@@ -30,8 +32,8 @@
             </div>
             <!-- header right -->
             <div class="flex items-center absolute top-0 right-6 text-gray-300 font-semibold ">
-                <a class="btnHeader" href="registerForm.php">Sign Up</a>
-                <a class="btnHeader" href="loginForm.php">Sign In</a>
+                <a class="btnHeader" href="user_requests.php">Requests</a>
+                <a class="btnHeader" href="logout.php">Logout</a>
             </div>
         </header>
         <!-- main -->
@@ -44,17 +46,49 @@
                     </svg>   
                 </span>     
                 <span class="inline-block">
-                    <input type="text" class="ml-3 h-full w-screen focus:outline-none focus:border-transparent" placeholder="Search for books">
-                </span>          
+                    <input type="text" id='search' class="ml-3 h-full w-screen focus:outline-none focus:border-transparent" placeholder="Search for books">
+                </span>     
             </div>
+            <!-- Searchbar suggestions -->
+            <div id="suggestions" style="width: 100vw;">
+                
+            </div>     
             <!-- info -->
             <div class="lg:border-2 lg:m-5 lg:pb-10 rounded-lg">
                 <div class="mt-5 ml-5">
                     <span class="text-xl lg:text-2xl font-semibold text-black flex justify-center ">Welcome to the Library Management System</span>
                 </div>
+                <div class="mt-5 ml-5">
+                    <span style="font-size: 1.25rem; line-height: 1.75rem" class="font-semibold text-black flex justify-center">
+                        <?php 
+                            session_start();
+                            echo $_SESSION['name']." ".$_SESSION['surname'];
+                        ?>
+                     </span>
+                </div>
             </div>
 
         </main>
+        <!-- Notification impelment -->
+        <script>
+            function closeNotification(){
+                $('.notification').remove();
+            }
+        </script>
+        <?php 
+        if(isset($_GET['success'])){
+            $result = $_GET['success'];
+            if($result=='1'){
+                echo <<< notification
+                    <div class='notification' onclick='closeNotification'> Request has been send! </div>
+                notification;
+            } else {
+                echo <<< notification
+                    <div class='notification' onclick='closeNotification'> Something went wrong! </div>
+                notification;
+            }
+        }
+        ?>
 
     </div>
 </body>

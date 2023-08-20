@@ -16,6 +16,8 @@
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
                 $hash = $row['password'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['surname'] = $row['surname'];
             } 
         }
 

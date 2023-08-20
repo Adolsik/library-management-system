@@ -22,7 +22,7 @@
         $sql_create_user = "INSERT INTO users (name,surname,email,password) VALUES ('$name','$surname','$email','$hashPass')";
         $result = $conn->query($sql_create_user);
 
-        header('Location: index.php?registerSuccess=success');
+        header('Location: index.php?registersuccess=register');
         }
     }
 ?>
