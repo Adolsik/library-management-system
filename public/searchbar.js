@@ -1,8 +1,8 @@
-
 function fill(Value) {
    $('#search').val(Value);
    $('#suggestions').hide();
 }
+
 $(document).ready(function() {
    $("#search").keyup(function() {
        var name = $('#search').val();

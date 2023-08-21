@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['user'])){
+    header('Location: home.php?success=3');
+}
+session_abort();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,10 +76,10 @@
             </div>
 
         </main>
-        <!-- Notification impelment -->
+        <!-- Notification implement -->
         <script>
             function closeNotification(){
-                $('.notification').remove();
+                $('#notification').remove();
             }
         </script>
         <?php 
@@ -80,15 +87,26 @@
             $result = $_GET['success'];
             if($result=='1'){
                 echo <<< notification
-                    <div class='notification' onclick='closeNotification'> Request has been send! </div>
+                <div id='notification'>
+                    <div class='notificationSuccess'  onclick='closeNotification()'> Request has been send! </div>
+                </div>
+                notification;
+            } else if($result=='8') {
+                echo <<< notification
+                <div id='notification'>
+                    <div class='notificationFailed' onclick='closeNotification()'> Book is currently unavailable! </div>
+                </div>
                 notification;
             } else {
                 echo <<< notification
-                    <div class='notification' onclick='closeNotification'> Something went wrong! </div>
+                <div id='notification'>
+                    <div class='notificationFailed' onclick='closeNotification()'> Something went wrong! </div>
+                </div>
                 notification;
             }
         }
         ?>
+        
 
     </div>
 </body>

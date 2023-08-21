@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <title>Library Management System</title>
 </head>
@@ -47,6 +48,40 @@
             </div>
 
         </main>
+        <script>
+            function closeNotification(){
+                $('#notification').remove();
+            }
+        </script>
+        <?php 
+        if(isset($_GET['success'])){
+            $result = $_GET['success'];
+            if($result=='2'){
+                echo <<< notification
+                <div id='notification'>
+                    <div class='notificationSuccess' onclick='closeNotification()'> Logged out! </div>
+                </div>
+                notification;  
+            } else if($result=='1') {
+                echo <<< notification
+                <div id='notification'>
+                    <div class='notificationSuccess' onclick='closeNotification()'> Account created successfully. Please wait for verification. </div>
+                </div>
+                notification;  
+            } else if($result=='3') {
+                echo <<< notification
+                <div id='notification'>
+                    <div class='notificationFailed' onclick='closeNotification()'> No permission! </div>
+                </div>
+                notification;  
+            } else if($result=='4') {
+                echo <<< notification
+                <div id='notification'>
+                    <div class='notificationFailed' onclick='closeNotification()'> Account is not yet verified! </div>
+                </div>
+                notification;  
+            }}
+        ?>
 
     </div>
 </body>
