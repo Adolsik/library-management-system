@@ -1,17 +1,12 @@
 <?php
 session_start();
-
-echo <<< logout
-<button><a href='logout.php'>Logout</a> </button>
-
-logout;
-if($_SESSION['user']=='admin'){
-    echo <<< test
-    <h1> Dashboard </h1>
-
-test;
+if(!($_SESSION['user'])=='admin'){
+    header('Location: home.php?success=3');
 } else {
-    echo "No permision";
+    require('dashboardPage.php');
+    if(isset($_GET['verifications'])){ require('verifications.php'); }
+    if(isset($_GET['requests'])){ require('requests.php'); }
+    if(isset($_GET['books'])){ require('books.php'); }
 }
 
 ?>

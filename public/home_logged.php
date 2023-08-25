@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['user'])){
     header('Location: home.php?success=3');
 }
-session_abort();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +68,6 @@ session_abort();
                 <div class="mt-5 ml-5">
                     <span style="font-size: 1.25rem; line-height: 1.75rem" class="font-semibold text-black flex justify-center">
                         <?php 
-                            session_start();
                             echo $_SESSION['name']." ".$_SESSION['surname'];
                         ?>
                      </span>
