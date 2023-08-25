@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION['admin'])){
+    header('Location: home.php?success=3');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
