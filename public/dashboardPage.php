@@ -1,8 +1,7 @@
 <?php
-if(!isset($_SESSION['admin'])){
+if(!$_SESSION['user']=='admin'){
     header('Location: home.php?success=3');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
